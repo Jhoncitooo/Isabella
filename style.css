@@ -1,0 +1,980 @@
+/* ============================================================
+   ESTILOS: INVITACIÓN DE LEGOS PARA ISA 🧩✨
+   ============================================================ */
+
+:root {
+  --lego-red: #E52521;
+  --lego-red-dark: #B3100D;
+  --lego-blue: #006CB7;
+  --lego-blue-dark: #004D84;
+  --lego-yellow: #FFD500;
+  --lego-yellow-dark: #D4AF00;
+  --lego-green: #00A859;
+  --lego-green-dark: #007A41;
+  --lego-pink: #FF6584;
+  --lego-pink-dark: #E04868;
+  --lego-purple: #6C5CE7;
+  --lego-purple-dark: #5141CA;
+
+  --bg-gradient: linear-gradient(135deg, #FFF6E5 0%, #FFEBEF 50%, #E8F4FD 100%);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --text-main: #2D3748;
+  --text-muted: #718096;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 20px 40px rgba(229, 37, 33, 0.15);
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Background Lego Stud Grid Pattern */
+.lego-bg-pattern {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(230, 200, 160, 0.25) 3.5px, transparent 4px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* Floating interactive canvas */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Top Floating Bar */
+.top-bar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.icon-btn:hover {
+  transform: scale(1.1);
+  background: white;
+}
+
+/* Main Container */
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 30px 20px 80px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header Section */
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--lego-red);
+  box-shadow: 0 4px 14px rgba(229, 37, 33, 0.12);
+  border: 2px dashed rgba(229, 37, 33, 0.3);
+  margin-bottom: 14px;
+  animation: pulse-soft 2.5s infinite;
+}
+
+.main-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #1A202C;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.main-title .highlight {
+  background: linear-gradient(135deg, var(--lego-red), #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.18rem);
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Unboxing Envelope / Gift Box Section */
+.box-stage {
+  perspective: 1000px;
+  margin: 30px auto;
+  max-width: 420px;
+}
+
+.gift-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-float);
+  border: 3px solid #FFF;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+}
+
+.gift-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(229, 37, 33, 0.22);
+}
+
+.gift-icon-wrap {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #FFF0F2 0%, #FFE3E6 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  border: 4px solid white;
+  box-shadow: 0 8px 20px rgba(229, 37, 33, 0.15);
+  animation: bounce-gentle 2s infinite ease-in-out;
+}
+
+.gift-card h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #2D3748;
+}
+
+.gift-card p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 22px;
+}
+
+/* Lego 3D Buttons */
+.lego-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: white;
+  background: var(--lego-red);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 0 var(--lego-red-dark), 0 10px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+}
+
+.lego-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--lego-red-dark), 0 14px 25px rgba(0,0,0,0.2);
+}
+
+.lego-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--lego-red-dark), 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.lego-btn.blue {
+  background: var(--lego-blue);
+  box-shadow: 0 6px 0 var(--lego-blue-dark), 0 10px 20px rgba(0, 108, 183, 0.25);
+}
+.lego-btn.blue:hover {
+  box-shadow: 0 8px 0 var(--lego-blue-dark), 0 14px 25px rgba(0, 108, 183, 0.35);
+}
+.lego-btn.blue:active {
+  box-shadow: 0 2px 0 var(--lego-blue-dark);
+}
+
+.lego-btn.green {
+  background: var(--lego-green);
+  box-shadow: 0 6px 0 var(--lego-green-dark), 0 10px 20px rgba(0, 168, 89, 0.25);
+}
+.lego-btn.green:hover {
+  box-shadow: 0 8px 0 var(--lego-green-dark), 0 14px 25px rgba(0, 168, 89, 0.35);
+}
+.lego-btn.green:active {
+  box-shadow: 0 2px 0 var(--lego-green-dark);
+}
+
+.lego-btn.pink {
+  background: var(--lego-pink);
+  box-shadow: 0 6px 0 var(--lego-pink-dark), 0 10px 20px rgba(255, 101, 132, 0.3);
+}
+.lego-btn.pink:hover {
+  box-shadow: 0 8px 0 var(--lego-pink-dark), 0 14px 25px rgba(255, 101, 132, 0.4);
+}
+.lego-btn.pink:active {
+  box-shadow: 0 2px 0 var(--lego-pink-dark);
+}
+
+/* Lego Studs on top of buttons */
+.with-studs::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.45) 3px, transparent 3.5px);
+  background-size: 16px 6px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Invitation Main Content (initially hidden or shown smoothly) */
+#invitation-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#invitation-content.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Character Showcase Grid */
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin: 28px 0 35px;
+}
+
+.character-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  border: 3px solid transparent;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.character-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.character-card.selected {
+  border-color: var(--lego-pink);
+  box-shadow: 0 12px 30px rgba(255, 101, 132, 0.25);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F7 100%);
+}
+
+.character-card.chase-theme {
+  border-top: 6px solid var(--lego-blue);
+}
+.character-card.blancanieves-theme {
+  border-top: 6px solid var(--lego-red);
+}
+
+.card-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.chase-theme .card-tag {
+  background: #E8F4FD;
+  color: var(--lego-blue);
+}
+
+.blancanieves-theme .card-tag {
+  background: #FFEBEF;
+  color: var(--lego-red);
+}
+
+.character-img-wrap {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 10px;
+  background: radial-gradient(circle, #F8FAFC 0%, #EDF2F7 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+}
+
+.character-img-wrap img {
+  max-height: 210px;
+  max-width: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
+  transition: transform 0.4s ease;
+}
+
+.character-card:hover .character-img-wrap img {
+  transform: scale(1.08) rotate(-1deg);
+}
+
+.character-info h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-top: 8px;
+  color: #1A202C;
+}
+
+.character-info .char-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 6px 0 14px;
+}
+
+.char-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-chip {
+  background: #F7FAFC;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #4A5568;
+  border: 1px solid #E2E8F0;
+}
+
+.select-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: #EDF2F7;
+  color: #718096;
+  transition: all 0.25s ease;
+}
+
+.character-card.selected .select-indicator {
+  background: var(--lego-pink);
+  color: white;
+}
+
+/* Team Building Option */
+.team-option-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  margin-bottom: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  border: 2px dashed #CBD5E0;
+  transition: all 0.25s ease;
+}
+
+.team-option-card:hover {
+  border-color: var(--lego-purple);
+  transform: translateY(-2px);
+}
+
+.team-option-card.selected {
+  border: 2px solid var(--lego-purple);
+  background: #F6F4FE;
+}
+
+.team-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.team-icon {
+  font-size: 2rem;
+  background: #EDE9FE;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.team-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #1A202C;
+}
+
+.team-sub {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* Customizer Sections (Snacks, Music, Vibe) */
+.planning-section {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-soft);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-icon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #FFF5F5;
+  color: var(--lego-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.section-head h4 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1A202C;
+}
+
+.section-head p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* Pills Grid */
+.pills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.pill-choice {
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.pill-choice:hover {
+  border-color: #CBD5E0;
+  transform: translateY(-2px);
+}
+
+.pill-choice.active {
+  background: #FFF0F3;
+  border-color: var(--lego-pink);
+  box-shadow: 0 4px 12px rgba(255, 101, 132, 0.2);
+}
+
+.pill-emoji {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.pill-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2D3748;
+}
+
+.pill-choice.active .pill-label {
+  color: var(--lego-pink-dark);
+}
+
+/* The Grand Question Section */
+.proposal-box {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F2 100%);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-float);
+  border: 3px solid #FFE4B5;
+  margin-top: 35px;
+  position: relative;
+}
+
+.proposal-box h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 900;
+  color: #1A202C;
+  margin-bottom: 10px;
+}
+
+.proposal-box p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 28px;
+}
+
+.btn-actions-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: 80px;
+}
+
+.yes-btn {
+  font-size: 1.25rem !important;
+  padding: 18px 40px !important;
+  background: linear-gradient(135deg, #00A859 0%, #059669 100%) !important;
+  box-shadow: 0 8px 0 #007A41, 0 16px 30px rgba(0, 168, 89, 0.35) !important;
+  animation: pulse-grow 1.8s infinite;
+}
+
+.no-btn {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: #EDF2F7;
+  color: #718096;
+  border: 2px solid #CBD5E0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+
+/* Celebration VIP Ticket Modal/Card */
+#ticket-view {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  margin-top: 30px;
+}
+
+#ticket-view.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.vip-ticket {
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border: 4px solid #FFE169;
+  position: relative;
+}
+
+.ticket-header {
+  background: linear-gradient(135deg, #FF4B72 0%, #FF8066 100%);
+  color: white;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+}
+
+.ticket-header h3 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.ticket-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ticket-body {
+  padding: 28px;
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px dashed #E2E8F0;
+}
+
+.ticket-row:last-child {
+  border-bottom: none;
+}
+
+.ticket-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-val {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #1A202C;
+  text-align: right;
+}
+
+.ticket-divider {
+  position: relative;
+  height: 24px;
+  background: #F8FAFC;
+  border-top: 2px dashed #CBD5E0;
+  border-bottom: 2px dashed #CBD5E0;
+  margin: 10px 0;
+}
+
+.ticket-divider::before,
+.ticket-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--bg-gradient);
+  border-radius: 50%;
+}
+.ticket-divider::before { left: -14px; }
+.ticket-divider::after { right: -14px; }
+
+.ticket-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.whatsapp-btn {
+  background: #25D366 !important;
+  box-shadow: 0 6px 0 #128C7E, 0 12px 25px rgba(37, 211, 102, 0.3) !important;
+  color: white !important;
+  font-size: 1.15rem !important;
+}
+
+.whatsapp-btn:hover {
+  box-shadow: 0 8px 0 #128C7E, 0 16px 30px rgba(37, 211, 102, 0.4) !important;
+}
+
+/* Animations */
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes pulse-grow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Mobile Responsiveness & Touch Optimization */
+@media (max-width: 600px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .container {
+    padding: 16px 14px 60px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .top-bar {
+    top: 12px;
+    right: 12px;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .header-badge {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+  }
+
+  .main-title {
+    font-size: 1.85rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+  }
+
+  .gift-card {
+    padding: 26px 18px;
+    border-radius: 20px;
+  }
+
+  .gift-icon-wrap {
+    width: 80px;
+    height: 80px;
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+  }
+
+  .characters-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0 24px;
+  }
+
+  .character-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .character-img-wrap {
+    height: 200px;
+    margin: 10px 0 8px;
+  }
+
+  .character-img-wrap img {
+    max-height: 180px;
+  }
+
+  .character-info h3 {
+    font-size: 1.25rem;
+  }
+
+  .char-stats {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .team-option-card {
+    padding: 14px 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .team-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .planning-section {
+    padding: 20px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .section-head {
+    margin-bottom: 14px;
+  }
+
+  .section-icon-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
+  }
+
+  .section-head h4 {
+    font-size: 1.08rem;
+  }
+
+  .pills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .pill-choice {
+    padding: 12px 10px;
+    border-radius: 12px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    touch-action: manipulation;
+  }
+
+  .pill-emoji {
+    font-size: 1.45rem;
+  }
+
+  .pill-label {
+    font-size: 0.82rem;
+  }
+
+  .proposal-box {
+    padding: 26px 18px;
+    border-radius: 20px;
+    margin-top: 24px;
+  }
+
+  .proposal-box h3 {
+    font-size: 1.45rem;
+  }
+
+  .proposal-box p {
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+  }
+
+  .btn-actions-wrap {
+    flex-direction: column;
+    width: 100%;
+    min-height: 130px;
+    gap: 14px;
+  }
+
+  .lego-btn {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 15px 20px;
+    touch-action: manipulation;
+  }
+
+  .yes-btn {
+    width: 100% !important;
+    font-size: 1.15rem !important;
+    padding: 16px 20px !important;
+  }
+
+  .no-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    touch-action: manipulation;
+  }
+
+  .vip-ticket {
+    border-radius: 20px;
+  }
+
+  .ticket-header {
+    padding: 20px 16px;
+  }
+
+  .ticket-header h3 {
+    font-size: 1.35rem;
+  }
+
+  .ticket-body {
+    padding: 20px 16px;
+  }
+
+  .ticket-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 0;
+  }
+
+  .ticket-val {
+    text-align: left;
+    font-size: 0.95rem;
+  }
+
+  .whatsapp-btn {
+    font-size: 1.08rem !important;
+    padding: 16px 16px !important;
+  }
+}

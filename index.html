@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Invitación Especial para Isa! 🧩✨</title>
+  
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+</head>
+<body>
+
+  <!-- Fondo interactivo con patrón de studs Lego -->
+  <div class="lego-bg-pattern"></div>
+
+  <!-- Canvas para confeti de bloques -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Botones flotantes superiores -->
+  <div class="top-bar">
+    <button class="icon-btn" id="sound-toggle" title="Activar/Silenciar sonido" aria-label="Sonido">🔊</button>
+  </div>
+
+  <main class="container">
+
+    <!-- ==========================================
+         FASE 1: LA CAJA SORPRESA / INTRO
+         ========================================== -->
+    <section class="box-stage" id="intro-box">
+      <div class="text-center" style="margin-bottom: 20px;">
+        <div class="header-badge">
+          <span>✨</span> MENSAJE ULTRA SECRETO <span>✨</span>
+        </div>
+      </div>
+
+      <div class="gift-card" id="gift-card-trigger">
+        <div class="gift-icon-wrap">
+          🎁
+        </div>
+        <h3>¡Hola, Isa! 👋💖</h3>
+        <p>Llegó un paquete especial con piezas sorpresa y necesito a la mejor constructora para abrirlo...</p>
+        
+        <button class="lego-btn with-studs" id="open-box-btn">
+          <span>¡Abrir la sorpresa!</span>
+          <span>🧩</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         FASE 2: EL CONTENIDO DE LA INVITACIÓN
+         ========================================== -->
+    <section id="invitation-content">
+      
+      <!-- Encabezado Principal -->
+      <header class="text-center">
+        <div class="header-badge">
+          <span>🧱</span> MISIÓN OFICIAL DE CONSTRUCTORES
+        </div>
+        <h1 class="main-title">
+          ¿Armamos nuestros <span class="highlight">Legos Juntos?</span>
+        </h1>
+        <p class="subtitle">
+          Compré estos dos sets pensando en nosotros. Es el plan perfecto para desconectarnos, poner buena música, botanear algo rico y armarlos pieza por pieza. 🥰
+        </p>
+      </header>
+
+      <!-- Galería de los 2 Legos -->
+      <div class="text-center" style="margin-top: 15px;">
+        <span style="font-weight: 800; font-size: 1.05rem; color: #4A5568;">
+          👇 ¿Cuál te gustaría armar a ti? (Haz clic para elegirlo)
+        </span>
+      </div>
+
+      <div class="characters-grid">
+        
+        <!-- Tarjeta de Chase -->
+        <article class="character-card chase-theme" data-char="Chase (Paw Patrol) 🐕">
+          <span class="card-tag">El Más Valiente 🐾</span>
+          
+          <div class="character-img-wrap">
+            <img src="assets/chase.png" alt="Lego Chase de Paw Patrol" loading="eager">
+          </div>
+
+          <div class="character-info">
+            <h3>Chase (Paw Patrol) 🚨</h3>
+            <p class="char-desc">El perrito policía más leal de todos, listo para el caso con su gorrita y uniforme.</p>
+            
+            <div class="char-stats">
+              <span class="stat-chip">📏 9 cm</span>
+              <span class="stat-chip">🧱 Nano Blocks</span>
+              <span class="stat-chip">⭐ Nivel Pro</span>
+            </div>
+
+            <div class="select-indicator">
+              🧩 Elegir este lego
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta de Blancanieves -->
+        <article class="character-card blancanieves-theme selected" data-char="Blancanieves 🍎">
+          <span class="card-tag">Princesa Mágica 👑</span>
+          
+          <div class="character-img-wrap">
+            <img src="assets/blancanieves.png" alt="Lego Blancanieves" loading="eager">
+          </div>
+
+          <div class="character-info">
+            <h3>Blancanieves 🍎</h3>
+            <p class="char-desc">Con su icónico vestido azul y amarillo y su moño rojo. ¡Tierna, detallista y hermosa!</p>
+            
+            <div class="char-stats">
+              <span class="stat-chip">🎀 Moño 3D</span>
+              <span class="stat-chip">🧱 Nano Blocks</span>
+              <span class="stat-chip">⭐ Amor puro</span>
+            </div>
+
+            <div class="select-indicator">
+              ✨ ¡Elegido por Isa!
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Opción de Armar Ambos en Equipo -->
+      <div class="team-option-card" id="team-option">
+        <div class="team-content">
+          <div class="team-icon">🤝</div>
+          <div>
+            <div class="team-title">Opción C: ¡Armar los dos juntos en equipo!</div>
+            <div class="team-sub">Tú me ayudas con uno, yo te ayudo con el otro y nos reímos buscando las piezas enanas.</div>
+          </div>
+        </div>
+        <span class="stat-chip team-badge" style="background: #EBF4FF; color: #2B6CB0; font-weight: 800;">Seleccionar</span>
+      </div>
+
+
+      <!-- ==========================================
+           FASE 3: PLANIFICACIÓN DE LA CITA
+           ========================================== -->
+      
+      <!-- Menú de Snacks -->
+      <div class="planning-section">
+        <div class="section-head">
+          <div class="section-icon-badge">🍿</div>
+          <div>
+            <h4>El Menú Oficial de Construcción</h4>
+            <p>Armar bloques da hambre... ¿qué se te antoja comer mientras armamos?</p>
+          </div>
+        </div>
+
+        <div class="pills-grid">
+          <div class="pill-choice snack-pill" data-snack="Pizza 🍕">
+            <span class="pill-emoji">🍕</span>
+            <span class="pill-label">Pizza</span>
+          </div>
+          <div class="pill-choice snack-pill active" data-snack="Gomitas & Dulces 🍬">
+            <span class="pill-emoji">🍬</span>
+            <span class="pill-label">Gomitas</span>
+          </div>
+          <div class="pill-choice snack-pill active" data-snack="Papas & Snacks 🍟">
+            <span class="pill-emoji">🍟</span>
+            <span class="pill-label">Papas fritas</span>
+          </div>
+          <div class="pill-choice snack-pill" data-snack="Helado cremoso 🍦">
+            <span class="pill-emoji">🍦</span>
+            <span class="pill-label">Helado</span>
+          </div>
+          <div class="pill-choice snack-pill" data-snack="Boba / Malteada 🧋">
+            <span class="pill-emoji">🧋</span>
+            <span class="pill-label">Boba / Bebida</span>
+          </div>
+          <div class="pill-choice snack-pill" data-snack="Chocolates 🍫">
+            <span class="pill-emoji">🍫</span>
+            <span class="pill-label">Chocolates</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playlist / Ambiente -->
+      <div class="planning-section">
+        <div class="section-head">
+          <div class="section-icon-badge" style="background: #EBF8FF; color: #3182CE;">🎶</div>
+          <div>
+            <h4>El Soundtrack de la Cita</h4>
+            <p>¿Qué vibra le ponemos a la sesión de construcción?</p>
+          </div>
+        </div>
+
+        <div class="pills-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+          <div class="pill-choice music-pill active" data-music="Lo-fi Chill & Relajante 🎧">
+            <span class="pill-emoji">🎧</span>
+            <span class="pill-label">Lo-fi Chill</span>
+          </div>
+          <div class="pill-choice music-pill" data-music="Disney Hits & Clásicos 🏰">
+            <span class="pill-emoji">🏰</span>
+            <span class="pill-label">Disney Hits</span>
+          </div>
+          <div class="pill-choice music-pill" data-music="Pop & Chismesito 💃">
+            <span class="pill-emoji">💃</span>
+            <span class="pill-label">Pop & Chisme</span>
+          </div>
+          <div class="pill-choice music-pill" data-music="¡Isa tiene el control del Bluetooth! 📱">
+            <span class="pill-emoji">📱</span>
+            <span class="pill-label">Tú eres la DJ</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           FASE 4: LA GRAN PREGUNTA
+           ========================================== -->
+      <div class="proposal-box">
+        <h3>¿Aceptas esta cita de legos, Isa? 🧩✨</h3>
+        <p>Prometo buena plática, risas aseguradas, paciencia si se cae un piso y cero presiones.</p>
+
+        <div class="btn-actions-wrap">
+          <button class="lego-btn with-studs yes-btn" id="yes-btn">
+            <span>¡SIII, ME ENCANTA!</span>
+            <span>💖🥳</span>
+          </button>
+
+          <button class="no-btn" id="no-btn">
+            Mmm no sé... 🤔
+          </button>
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           FASE 5: EL PASE VIP DE CONFIRMACIÓN
+           ========================================== -->
+      <div id="ticket-view">
+        <div class="vip-ticket">
+          <div class="ticket-header">
+            <div class="ticket-badge">Pase Oficial de Construcción</div>
+            <h3>¡CITA DE LEGOS CONFIRMADA! 🎉</h3>
+            <p style="font-size: 0.95rem; opacity: 0.95; margin-top: 4px;">Acceso VIP garantizado para una tarde increíble</p>
+          </div>
+
+          <div class="ticket-body">
+            <div class="ticket-row">
+              <span class="ticket-label"><span>👩‍🎨</span> Constructora Estrella:</span>
+              <span class="ticket-val" style="color: var(--lego-pink); font-size: 1.15rem;">Isa 💕</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-label"><span>🧩</span> Lego Elegido:</span>
+              <span class="ticket-val" id="pass-character">Blancanieves 🍎</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-label"><span>🍿</span> Menú de Snacks:</span>
+              <span class="ticket-val" id="pass-snacks">Gomitas, Papas</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-label"><span>🎵</span> Soundtrack:</span>
+              <span class="ticket-val" id="pass-music">Lo-fi Chill</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-label"><span>📅</span> Estado:</span>
+              <span class="ticket-val" id="pass-time" style="color: #00A859;">¡Listo para coordinar fecha!</span>
+            </div>
+
+            <div class="ticket-divider"></div>
+
+            <div style="background: #FFFDF5; border: 1px solid #FEEBC8; padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; font-size: 0.88rem; color: #744210; text-align: center;">
+              📌 <strong>Cláusula Oficial:</strong> Si se pierde una pieza miniatura bajo el sillón, está prohibido rendirse hasta encontrarla.
+            </div>
+
+            <div class="ticket-actions">
+              <a href="https://wa.me/573225106265?text=%C2%A1Hola!%20%F0%9F%92%96%E2%9C%A8%20Ya%20vi%20la%20invitaci%C3%B3n%20y%20%C2%A1SIII%2C%20acepto%20armar%20los%20legos%20contigo!%20%F0%9F%A7%A9%F0%9F%8E%89" target="_blank" class="lego-btn with-studs whatsapp-btn text-center" id="whatsapp-btn">
+                <span>💬 Avisar por WhatsApp que sí acepto</span>
+              </a>
+
+              <button class="lego-btn" id="copy-msg-btn" style="background: #4A5568; box-shadow: 0 5px 0 #2D3748; font-size: 0.92rem;">
+                <span>📋 Copiar mensaje para enviarlo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Lógica interactiva -->
+  <script src="app.js"></script>
+</body>
+</html>
